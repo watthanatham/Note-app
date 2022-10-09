@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_margin="7dp"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         app:cardCornerRadius="10dp" >
 
 
@@ -23,21 +24,24 @@
                 android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/_6_oct_2022"/>
+                android:text="@string/_6_oct_2022"
+                android:textColor="@color/ColorWhite" />
 
             <TextView
                 android:id="@+id/showTitle"
                 android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/title"/>
+                android:text="@string/title"
+                android:textColor="@color/ColorWhite" />
 
             <TextView
                 android:id="@+id/showDesc"
                 android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/description"/>
+                android:text="@string/description"
+                android:textColor="@color/ColorWhite" />
 
         </LinearLayout>
 

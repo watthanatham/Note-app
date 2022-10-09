@@ -55,8 +55,17 @@ class NoteViewModel(private val noteDao: NoteDao): ViewModel() {
             noteDao.delete(note)
         }
     }
+    fun retrieveNote(id: Int): LiveData<Note> {
+        return noteDao.getNoteById(id).asLiveData()
+    }
+    fun isEntryValid(titleName: String, priority: Int, description: String) : Boolean {
+        if(titleName.isBlank() || priority == null || description.isBlank()) {
+            return false
+        }
+        return true
+    }
 }
-class NoteViewHolderFactory(private val noteDao: NoteDao) : ViewModelProvider.Factory {
+class NoteViewModelFactory(private val noteDao: NoteDao) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(NoteViewModel::class.java)) {
             return NoteViewModel(noteDao) as T

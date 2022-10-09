@@ -4,6 +4,7 @@
     package="com.watthanatham.easynotes">
 
     <application
+        android:name="com.watthanatham.easynotes.NoteApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

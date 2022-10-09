@@ -1,22 +1,37 @@
 package com.watthanatham.easynotes
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.watthanatham.easynotes.data.Note
+import com.watthanatham.easynotes.databinding.FragmentCreateNoteBinding
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class CreateNoteFragment : Fragment() {
 
-    private var noteId = -1
+    private val viewModel: NoteViewModel by activityViewModels {
+        NoteViewModelFactory(
+            (activity?.application as NoteApplication).database.notesDao()
+        )
+    }
     var currentDate:String? = null
+    lateinit var note: Note
+    private var _binding: FragmentCreateNoteBinding? = null
+    private val binding get() = _binding!!
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        noteId = requireArguments().getInt("noteId",-1)
 
     }
 
@@ -25,23 +40,75 @@ class CreateNoteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_note, container, false)
+        _binding = FragmentCreateNoteBinding.inflate(inflater, container, false)
+        return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (noteId != -1) {
-
+//        val id = note.id
+//        if (id > 0) {
+//            viewModel.retrieveNote(id).observe(this.viewLifecycleOwner) { selectedNote ->
+//                note = selectedNote
+//                bind(note)
+//            }
+//        } else {
+            binding.btnSave.setOnClickListener {
+                addNewNote()
+//            }
         }
-        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
-        currentDate = sdf.format(Date())
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // Hide keyboard.
+        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as
+                InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
+        _binding = null
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CreateNoteFragment().apply {
-                arguments = Bundle().apply {
-                }
-            }
+    private fun bind(note: Note) {
+        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+        currentDate = sdf.format(Date())
+        val dateTime = currentDate
+        binding.apply {
+            etNoteTitle.setText(note.titleName, TextView.BufferType.SPANNABLE)
+            showDateTime.setText(dateTime, TextView.BufferType.SPANNABLE)
+            etPriority.setText(note.priority, TextView.BufferType.SPANNABLE)
+            etNoteDesc.setText(note.description, TextView.BufferType.SPANNABLE)
+            btnSave.setOnClickListener { updateNote() }
+        }
+    }
+
+    private fun isEntryValid(): Boolean {
+        return viewModel.isEntryValid(
+            binding.etNoteTitle.text.toString(),
+            binding.etPriority.text.toString().toInt(),
+            binding.etNoteDesc.text.toString()
+        )
+    }
+    private fun addNewNote() {
+        if(isEntryValid()) {
+            viewModel.addNewNote(
+                binding.etNoteTitle.text.toString(),
+                binding.etPriority.text.toString().toInt(),
+                binding.etNoteDesc.text.toString(),
+                binding.showDateTime.text.toString()
+            )
+            val action = CreateNoteFragmentDirections.actionCreateNoteFragmentToHomeFragment()
+            findNavController().navigate(action)
+        }
+    }
+    private fun updateNote() {
+        if (isEntryValid()) {
+            viewModel.updateNote(
+                this.note.id,
+                this.binding.etNoteTitle.text.toString(),
+                this.binding.showDateTime.text.toString().length,
+                this.binding.etPriority.text.toString(),
+                this.binding.etNoteDesc.text.toString()
+            )
+            val action = CreateNoteFragmentDirections.actionCreateNoteFragmentToHomeFragment()
+            findNavController().navigate(action)
+        }
     }
 }
