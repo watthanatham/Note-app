@@ -4,7 +4,7 @@ import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface NotesDao {
+interface NoteDao {
     @Insert
     suspend fun insert(note: Note)
 
@@ -15,7 +15,7 @@ interface NotesDao {
     suspend fun delete(notes: Note)
 
     @Query("SELECT * from note WHERE id = :id")
-    fun getNote(id: Int): Flow<Note>
+    fun getNoteById(id: Int): Flow<Note>
 
     @Query("SELECT * from note WHERE title = :title")
     fun getNoteByName(title: String): Flow<Note>
