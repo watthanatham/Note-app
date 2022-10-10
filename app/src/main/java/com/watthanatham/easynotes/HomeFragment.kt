@@ -45,11 +45,9 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         val adapter = NoteListAdapter { note ->
-            val action = CreateNoteFragmentDirections.actionCreateNoteFragmentToHomeFragment()
-//            val action = CreateNoteFragmentDirections.actionCreateNoteFragmentToHomeFragment(note.id)
+            val action = HomeFragmentDirections.actionHomeFragmentToEditNoteFragment(note.id)
             this.findNavController().navigate(action)
         }
         binding.recyclerView.adapter = adapter
