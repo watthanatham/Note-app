@@ -14,4 +14,9 @@
     <color name="shapeRed">#FF6666</color>
     <color name="shapeYellow">#FFFF66</color>
     <color name="shapeGreen">#66FFB3</color>
+    <color name="backRed">#FF6666</color>
+    <color name="backYellow">#FFFF66</color>
+    <color name="backGreen">#66FFB3</color>
+    <color name="add_color">#008CFF</color>
+    <color name="save_color">#00994D</color>
 </resources>

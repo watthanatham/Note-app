@@ -51,6 +51,8 @@ class NoteListAdapter(private val onItemClicked: (Note) -> Unit) : ListAdapter<N
         holder.itemView.setOnClickListener {
             onItemClicked(current)
         }
+
+
         holder.bind(current)
     }
 
