@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.watthanatham.easynotes.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:label="Easy Notes"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_createNoteFragment"
             app:destination="@id/createNoteFragment" />
@@ -20,8 +20,8 @@
     <fragment
         android:id="@+id/createNoteFragment"
         android:name="com.watthanatham.easynotes.CreateNoteFragment"
-        android:label="fragment_create_note"
-        tools:layout="@layout/fragment_create_note" >
+        android:label="Create Note"
+        tools:layout="@layout/fragment_create_note">
         <action
             android:id="@+id/action_createNoteFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -29,8 +29,8 @@
     <fragment
         android:id="@+id/editNoteFragment"
         android:name="com.watthanatham.easynotes.EditNoteFragment"
-        android:label="fragment_edit_note"
-        tools:layout="@layout/fragment_edit_note" >
+        android:label="My Note"
+        tools:layout="@layout/fragment_edit_note">
         <argument
             android:name="note_id"
             app:argType="integer" />

@@ -8,15 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="7dp"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="10dp"
+        android:backgroundTint="@color/ColorLightBlack">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
-            android:orientation="vertical"
-            android:id="@+id/setB1">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/showTitle"
@@ -24,6 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="-3dp"
                 android:padding="8dp"
+                android:textColor="@color/white"
                 android:text="@string/title"
                 android:textSize="18sp" />
 
@@ -31,6 +32,7 @@
                 android:id="@+id/showDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/ColorGray"
                 android:padding="10dp"
                 android:text="@string/description"
                 android:textSize="14sp" />
@@ -39,6 +41,7 @@
                 android:id="@+id/showDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/ColorGray"
                 android:padding="10dp"
                 android:text="@string/_6_oct_2022"
                 android:textSize="14sp" />
