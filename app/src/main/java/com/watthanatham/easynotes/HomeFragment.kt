@@ -6,10 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.coroutineScope
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.watthanatham.easynotes.adapter.NoteListAdapter
+import com.watthanatham.easynotes.data.Note
+
 import com.watthanatham.easynotes.databinding.FragmentHomeBinding
+import kotlin.coroutines.CoroutineContext
 
 
 class HomeFragment : Fragment() {
@@ -21,41 +28,47 @@ class HomeFragment : Fragment() {
     }
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private lateinit var recyclerView: RecyclerView
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+    ): View {
+        _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
-//        val adapter = NoteListAdapter { note ->
-//            val action = HomeFragmentDirections.actionHomeFragmentToCreateNoteFragment()
-//            this.findNavController().navigate(action)
-//        }
-//        binding.recyclerView.adapter = adapter
-//        viewModel.allNotes.observe(this.viewLifecycleOwner) { note ->
-//            note.let {
-//                adapter.submitList(it)
-//            }
-//        }
+        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
+        val adapter = NoteListAdapter {
+
+        }
+        binding.recyclerView.adapter = adapter
+        viewModel.allNotes.observe(this.viewLifecycleOwner) { notes ->
+            notes.let {
+                adapter.submitList(it)
+            }
+        }
         binding.btnAddNote.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToCreateNoteFragment()
             this.findNavController().navigate(action)
         }
     }
 
-    companion object {
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
+
+}
+
+private fun <T> LiveData<T>.observe(
+    coroutineContext: CoroutineContext,
+    function: (t: List<Note>) -> Unit
+) {
+    TODO("Not yet implemented")
 }

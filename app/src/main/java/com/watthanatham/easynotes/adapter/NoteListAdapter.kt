@@ -1,6 +1,7 @@
 package com.watthanatham.easynotes.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,11 +11,11 @@ import com.watthanatham.easynotes.data.Note
 import com.watthanatham.easynotes.databinding.ItemListNoteBinding
 
 
-class NoteListAdapter(private val onNoteClicked: (Note) -> Unit) : ListAdapter<Note, NoteListAdapter.NoteViewHolder>(DiffCallback) {
+class NoteListAdapter(private val onItemClicked: (Note) -> Unit) : ListAdapter<Note, NoteListAdapter.NoteViewHolder>(DiffCallback) {
     companion object {
         private val DiffCallback = object: DiffUtil.ItemCallback<Note>() {
             override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
-                return oldItem.titleName == newItem.titleName
+                return oldItem.id == newItem.id
             }
             override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {
                 return oldItem == newItem
@@ -32,22 +33,26 @@ class NoteListAdapter(private val onNoteClicked: (Note) -> Unit) : ListAdapter<N
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val viewHolder = NoteViewHolder(
-            ItemListNoteBinding.inflate(LayoutInflater.from(parent.context), parent, false
+            ItemListNoteBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
             )
         )
         viewHolder.itemView.setOnClickListener{
             val position = viewHolder.adapterPosition
-            onNoteClicked(getItem(position))
+            onItemClicked(getItem(position))
         }
-        return  viewHolder
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val current = getItem(position)
-        holder.itemView.setOnClickListener{
-            onNoteClicked(current)
+        holder.itemView.setOnClickListener {
+            onItemClicked(current)
         }
         holder.bind(current)
     }
+
 
 }

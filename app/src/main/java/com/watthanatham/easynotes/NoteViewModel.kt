@@ -5,6 +5,7 @@ import com.watthanatham.easynotes.data.Note
 import com.watthanatham.easynotes.data.NoteDao
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
+import java.util.concurrent.Flow
 
 class NoteViewModel(private val noteDao: NoteDao): ViewModel() {
     val allNotes: LiveData<List<Note>> = noteDao.getNotes().asLiveData()
