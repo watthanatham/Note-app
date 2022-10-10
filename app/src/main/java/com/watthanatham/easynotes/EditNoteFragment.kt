@@ -13,6 +13,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.watthanatham.easynotes.data.Note
 import com.watthanatham.easynotes.databinding.FragmentEditNoteBinding
 import org.w3c.dom.Text
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class EditNoteFragment : Fragment() {
@@ -25,6 +27,8 @@ class EditNoteFragment : Fragment() {
     lateinit var note: Note
     private var _binding: FragmentEditNoteBinding? = null
     private val binding get() = _binding!!
+    var priority: Int = 1
+    var currentDate:String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +46,9 @@ class EditNoteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+        currentDate = sdf.format(Date())
+        binding.showDateTime.text = currentDate
         val id = navigationArgs.noteId
         viewModel.retrieveNote(id).observe(this.viewLifecycleOwner) { selectedNote ->
             note = selectedNote
@@ -62,17 +69,36 @@ class EditNoteFragment : Fragment() {
 //            etPriority.setText(note.priority, TextView.BufferType.SPANNABLE)
             btnUpdate.setOnClickListener { updateNote() }
             btnDelete.setOnClickListener { showConfirmationDialog()  }
+            binding.pRed.setOnClickListener { v ->
+                priority = 1
+                binding.pRed.setImageResource(R.drawable.ic_done)
+                binding.pYellow.setImageResource(0)
+                binding.pGreen.setImageResource(0)
+            }
+            binding.pYellow.setOnClickListener { v ->
+                priority = 2
+                binding.pRed.setImageResource(0)
+                binding.pYellow.setImageResource(R.drawable.ic_done)
+                binding.pGreen.setImageResource(0)
+            }
+            binding.pGreen.setOnClickListener { v ->
+                priority = 3
+                binding.pRed.setImageResource(0)
+                binding.pYellow.setImageResource(0)
+                binding.pGreen.setImageResource(R.drawable.ic_done)
+            }
         }
     }
-    // should be fixed priority
     private fun updateNote() {
         return viewModel.updateNote(
             this.navigationArgs.noteId,
             this.binding.etNoteTitle.text.toString(),
-            this.binding.etPriority.text.toString().toInt(),
+            priority,
             this.binding.etNoteDesc.text.toString(),
             this.binding.showDateTime.text.toString()
         )
+        val action = EditNoteFragmentDirections.actionEditNoteFragmentToHomeFragment()
+        findNavController().navigate(action)
     }
     private fun deleteNote() {
         viewModel.deleteNote(note)
