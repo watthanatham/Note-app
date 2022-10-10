@@ -5,7 +5,6 @@ import com.watthanatham.easynotes.data.Note
 import com.watthanatham.easynotes.data.NoteDao
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
-import java.util.concurrent.Flow
 
 class NoteViewModel(private val noteDao: NoteDao): ViewModel() {
     val allNotes: LiveData<List<Note>> = noteDao.getNotes().asLiveData()
@@ -38,7 +37,7 @@ class NoteViewModel(private val noteDao: NoteDao): ViewModel() {
         return Note(
             id = noteId,
             titleName = titleName,
-            priority = priority.toInt(),
+            priority = priority,
             description = description,
             dateTime = dateTime
         )
@@ -60,11 +59,12 @@ class NoteViewModel(private val noteDao: NoteDao): ViewModel() {
         return noteDao.getNoteById(id).asLiveData()
     }
     fun isEntryValid(titleName: String, priority: Int, description: String) : Boolean {
-        if(titleName.isBlank() || priority == null || description.isBlank()) {
+        if(titleName.isBlank() || priority != 0 && priority >= 3 || description.isBlank()) {
             return false
         }
         return true
     }
+
 }
 class NoteViewModelFactory(private val noteDao: NoteDao) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

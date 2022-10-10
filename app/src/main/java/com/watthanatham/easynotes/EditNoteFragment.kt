@@ -1,19 +1,18 @@
 package com.watthanatham.easynotes
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.watthanatham.easynotes.data.Note
-import com.watthanatham.easynotes.databinding.FragmentCreateNoteBinding
 import com.watthanatham.easynotes.databinding.FragmentEditNoteBinding
+import org.w3c.dom.Text
 
 
 class EditNoteFragment : Fragment() {
@@ -57,16 +56,24 @@ class EditNoteFragment : Fragment() {
 
     private fun bind(note: Note) {
         binding.apply {
-            btnUpdate.setOnClickListener { editNote() }
-            btnDelete.setOnClickListener { showConfirmationDialog() }
+            etNoteTitle.setText(note.titleName, TextView.BufferType.SPANNABLE)
+//            showDateTime.setText(note.dateTime, TextView.BufferType.SPANNABLE)
+            etNoteDesc.setText(note.description, TextView.BufferType.SPANNABLE)
+//            etPriority.setText(note.priority, TextView.BufferType.SPANNABLE)
+            btnUpdate.setOnClickListener { updateNote() }
+            btnDelete.setOnClickListener { showConfirmationDialog()  }
         }
     }
-    // not ready to use update function
-    private fun editNote() {
-        val action = EditNoteFragmentDirections.actionEditNoteFragmentToHomeFragment()
-        this.findNavController().navigate(action)
+    // should be fixed priority
+    private fun updateNote() {
+        return viewModel.updateNote(
+            this.navigationArgs.noteId,
+            this.binding.etNoteTitle.text.toString(),
+            this.binding.etPriority.text.toString().toInt(),
+            this.binding.etNoteDesc.text.toString(),
+            this.binding.showDateTime.text.toString()
+        )
     }
-    //
     private fun deleteNote() {
         viewModel.deleteNote(note)
         findNavController().navigateUp()
@@ -84,5 +91,9 @@ class EditNoteFragment : Fragment() {
                 deleteNote()
             }
             .show()
+    }
+    private fun backToHomePage() {
+        val action = EditNoteFragmentDirections.actionEditNoteFragmentToHomeFragment()
+        findNavController().navigate(action)
     }
 }
