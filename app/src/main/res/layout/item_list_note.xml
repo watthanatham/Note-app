@@ -19,25 +19,29 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/showDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="@string/_6_oct_2022" />
-
-            <TextView
                 android:id="@+id/showTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="@string/title" />
+                android:layout_marginLeft="-3dp"
+                android:padding="8dp"
+                android:text="@string/title"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/showDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="@string/description" />
+                android:padding="10dp"
+                android:text="@string/description"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/showDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/_6_oct_2022"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
