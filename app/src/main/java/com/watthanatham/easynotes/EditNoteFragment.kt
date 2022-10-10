@@ -58,7 +58,7 @@ class EditNoteFragment : Fragment() {
     private fun bind(note: Note) {
         binding.apply {
             btnUpdate.setOnClickListener { editNote() }
-            btnDelete.setOnClickListener { deleteNote() }
+            btnDelete.setOnClickListener { showConfirmationDialog() }
         }
     }
     // not ready to use update function
