@@ -16,7 +16,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:hint="Notes Title"
-
+        android:background="@drawable/label_text_background"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -37,38 +37,72 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etNoteTitle" />
 
-    <EditText
-        android:id="@+id/etPriority"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/txtPriority"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:hint="Priority"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginBottom="16dp"
+        android:text="@string/priority"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/etNoteDesc"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/showDateTime" />
+
+    <ImageView
+        android:id="@+id/pRed"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/red_shape"
+        android:src="@drawable/ic_done"
+        app:layout_constraintBottom_toTopOf="@+id/etNoteDesc"
+        app:layout_constraintEnd_toStartOf="@+id/pYellow"
+        app:layout_constraintStart_toEndOf="@+id/txtPriority" />
+
+    <ImageView
+        android:id="@+id/pYellow"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/yellow_shape"
+        app:layout_constraintBottom_toTopOf="@+id/etNoteDesc"
+        app:layout_constraintStart_toEndOf="@+id/pRed" />
+
+    <ImageView
+        android:id="@+id/pGreen"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/green_shape"
+        app:layout_constraintBottom_toTopOf="@+id/etNoteDesc"
+        app:layout_constraintStart_toEndOf="@+id/pYellow" />
 
     <EditText
         android:id="@+id/etNoteDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/label_text_background"
         android:hint="Description"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPriority" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPriority" />
 
     <Button
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="408dp"
+        android:layout_marginTop="364dp"
         android:text="@string/save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

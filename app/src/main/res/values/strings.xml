@@ -11,5 +11,6 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="edit_fragment_title">Edit Note</string>
+    <string name="priority">Priority</string>
 
 </resources>

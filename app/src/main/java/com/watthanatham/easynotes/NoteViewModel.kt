@@ -17,7 +17,7 @@ class NoteViewModel(private val noteDao: NoteDao): ViewModel() {
     private fun getNewNoteEntry(titleName: String, priority: Int, description: String, dateTime: String): Note {
         return Note(
             titleName = titleName,
-            priority = priority.toInt(),
+            priority = priority,
             description = description,
             dateTime = dateTime
         )

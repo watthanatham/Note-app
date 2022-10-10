@@ -28,6 +28,7 @@ class CreateNoteFragment : Fragment() {
     lateinit var note: Note
     private var _binding: FragmentCreateNoteBinding? = null
     private val binding get() = _binding!!
+    var priority: Int = 1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +56,24 @@ class CreateNoteFragment : Fragment() {
             binding.btnSave.setOnClickListener {
                 addNewNote()
             }
+        binding.pRed.setOnClickListener { v ->
+            priority = 1
+            binding.pRed.setImageResource(R.drawable.ic_done)
+            binding.pYellow.setImageResource(0)
+            binding.pGreen.setImageResource(0)
+        }
+        binding.pYellow.setOnClickListener { v ->
+            priority = 2
+            binding.pRed.setImageResource(0)
+            binding.pYellow.setImageResource(R.drawable.ic_done)
+            binding.pGreen.setImageResource(0)
+        }
+        binding.pGreen.setOnClickListener { v ->
+            priority = 3
+            binding.pRed.setImageResource(0)
+            binding.pYellow.setImageResource(0)
+            binding.pGreen.setImageResource(R.drawable.ic_done)
+        }
 //        }
     }
     override fun onDestroyView() {
@@ -65,23 +84,23 @@ class CreateNoteFragment : Fragment() {
         _binding = null
     }
 
-    private fun bind(note: Note) {
-        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
-        currentDate = sdf.format(Date())
-        val dateTime = currentDate
-        binding.apply {
-            etNoteTitle.setText(note.titleName, TextView.BufferType.SPANNABLE)
-            showDateTime.setText(dateTime, TextView.BufferType.SPANNABLE)
-            etPriority.setText(note.priority, TextView.BufferType.SPANNABLE)
-            etNoteDesc.setText(note.description, TextView.BufferType.SPANNABLE)
-            btnSave.setOnClickListener { updateNote() }
-        }
-    }
+//    private fun bind(note: Note) {
+//        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+//        currentDate = sdf.format(Date())
+//        val dateTime = currentDate
+//        binding.apply {
+//            etNoteTitle.setText(note.titleName, TextView.BufferType.SPANNABLE)
+//            showDateTime.setText(dateTime, TextView.BufferType.SPANNABLE)
+////            etPriority.setText(note.priority, TextView.BufferType.SPANNABLE)
+//            etNoteDesc.setText(note.description, TextView.BufferType.SPANNABLE)
+//            btnSave.setOnClickListener { updateNote() }
+//        }
+//    }
 
     private fun isEntryValid(): Boolean {
         return viewModel.isEntryValid(
             binding.etNoteTitle.text.toString(),
-            binding.etPriority.text.toString().toInt(),
+            priority,
             binding.etNoteDesc.text.toString()
         )
     }
@@ -89,22 +108,9 @@ class CreateNoteFragment : Fragment() {
         if(isEntryValid()) {
             viewModel.addNewNote(
                 binding.etNoteTitle.text.toString(),
-                binding.etPriority.text.toString().toInt(),
+                priority,
                 binding.etNoteDesc.text.toString(),
                 binding.showDateTime.text.toString()
-            )
-            val action = CreateNoteFragmentDirections.actionCreateNoteFragmentToHomeFragment()
-            findNavController().navigate(action)
-        }
-    }
-    private fun updateNote() {
-        if (isEntryValid()) {
-            viewModel.updateNote(
-                this.note.id,
-                this.binding.etNoteTitle.text.toString(),
-                this.binding.showDateTime.text.toString().length,
-                this.binding.etPriority.text.toString(),
-                this.binding.etNoteDesc.text.toString()
             )
             val action = CreateNoteFragmentDirections.actionCreateNoteFragmentToHomeFragment()
             findNavController().navigate(action)
