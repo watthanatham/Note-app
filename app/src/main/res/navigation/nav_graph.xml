@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_createNoteFragment"
             app:destination="@id/createNoteFragment" />
+<!--        <argument-->
+<!--            android:name="note_id"-->
+<!--            app:argType="integer" />-->
     </fragment>
     <fragment
         android:id="@+id/createNoteFragment"

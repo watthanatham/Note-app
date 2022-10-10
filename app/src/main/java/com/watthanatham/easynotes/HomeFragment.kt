@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.coroutineScope
+import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.watthanatham.easynotes.adapter.NoteListAdapter
 import com.watthanatham.easynotes.data.Note
 
@@ -43,9 +45,12 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
-        val adapter = NoteListAdapter {
-
+//        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
+        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        val adapter = NoteListAdapter { note ->
+            val action = CreateNoteFragmentDirections.actionCreateNoteFragmentToHomeFragment()
+//            val action = CreateNoteFragmentDirections.actionCreateNoteFragmentToHomeFragment(note.id)
+            this.findNavController().navigate(action)
         }
         binding.recyclerView.adapter = adapter
         viewModel.allNotes.observe(this.viewLifecycleOwner) { notes ->
