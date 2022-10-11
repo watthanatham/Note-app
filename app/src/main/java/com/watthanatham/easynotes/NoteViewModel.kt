@@ -3,11 +3,15 @@ package com.watthanatham.easynotes
 import androidx.lifecycle.*
 import com.watthanatham.easynotes.data.Note
 import com.watthanatham.easynotes.data.NoteDao
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
 class NoteViewModel(private val noteDao: NoteDao): ViewModel() {
     val allNotes: LiveData<List<Note>> = noteDao.getNotes().asLiveData()
+    val normalNote: LiveData<List<Note>> = noteDao.getNoteByStatusNormal().asLiveData()
+    val mediumNote: LiveData<List<Note>> = noteDao.getNoteByStatusMedium().asLiveData()
+    val highNote: LiveData<List<Note>> = noteDao.getNoteByStatusHigh().asLiveData()
 
     private fun insertNote(note: Note) {
         viewModelScope.launch {
@@ -64,6 +68,11 @@ class NoteViewModel(private val noteDao: NoteDao): ViewModel() {
         }
         return true
     }
+    fun getNormalNote(): Flow<List<Note>> = noteDao.getNoteByStatusNormal()
+
+    fun getMediumNote(): Flow<List<Note>> = noteDao.getNoteByStatusMedium()
+
+    fun getHighNote(): Flow<List<Note>> = noteDao.getNoteByStatusHigh()
 
 }
 class NoteViewModelFactory(private val noteDao: NoteDao) : ViewModelProvider.Factory {

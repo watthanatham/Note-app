@@ -18,6 +18,7 @@ import com.watthanatham.easynotes.adapter.NoteListAdapter
 import com.watthanatham.easynotes.data.Note
 
 import com.watthanatham.easynotes.databinding.FragmentHomeBinding
+import kotlinx.coroutines.flow.observeOn
 import kotlin.coroutines.CoroutineContext
 
 
@@ -31,6 +32,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
+    var priority: Int = 1
 
 
 
@@ -59,6 +61,35 @@ class HomeFragment : Fragment() {
         binding.btnAddNote.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToCreateNoteFragment()
             this.findNavController().navigate(action)
+        }
+
+       binding.txtHigh.setOnClickListener {
+            viewModel.highNote.observe(this.viewLifecycleOwner) { notes ->
+                notes.let {
+                    adapter.submitList(it)
+                }
+            }
+        }
+       binding.txtMedium.setOnClickListener {
+            viewModel.mediumNote.observe(this.viewLifecycleOwner) { notes ->
+                notes.let {
+                    adapter.submitList(it)
+                }
+            }
+        }
+        binding.txtNormal.setOnClickListener {
+            viewModel.normalNote.observe(this.viewLifecycleOwner) { notes ->
+                notes.let {
+                    adapter.submitList(it)
+                }
+            }
+        }
+        binding.resetFilter.setOnClickListener {
+            viewModel.allNotes.observe(this.viewLifecycleOwner) { notes ->
+                notes.let {
+                    adapter.submitList(it)
+                }
+            }
         }
     }
 

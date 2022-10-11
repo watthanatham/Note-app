@@ -20,6 +20,15 @@ interface NoteDao {
     @Query("SELECT * from note WHERE title = :title")
     fun getNoteByName(title: String): Flow<Note>
 
+    @Query("SELECT * from note WHERE priority = 1")
+    fun getNoteByStatusHigh(): Flow<List<Note>>
+
+    @Query("SELECT * from note WHERE priority = 2")
+    fun getNoteByStatusMedium(): Flow<List<Note>>
+
+    @Query("SELECT * from note WHERE priority = 3")
+    fun getNoteByStatusNormal(): Flow<List<Note>>
+
     @Query("SELECT * from note ORDER BY title ASC")
     fun getNotes(): Flow<List<Note>>
 }
