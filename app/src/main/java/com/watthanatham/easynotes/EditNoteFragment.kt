@@ -127,8 +127,4 @@ class EditNoteFragment : Fragment() {
             }
             .show()
     }
-    private fun backToHomePage() {
-        val action = EditNoteFragmentDirections.actionEditNoteFragmentToHomeFragment()
-        findNavController().navigate(action)
-    }
 }
