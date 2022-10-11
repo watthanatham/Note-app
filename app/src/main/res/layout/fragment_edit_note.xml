@@ -111,6 +111,7 @@
         android:layout_marginBottom="52dp"
         android:text="Update"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:backgroundTint="@color/save_color"
         app:layout_constraintEnd_toStartOf="@+id/btnDelete"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -121,6 +122,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginBottom="52dp"
         android:text="Delete"
+        android:backgroundTint="@color/deleteColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnUpdate" />
 

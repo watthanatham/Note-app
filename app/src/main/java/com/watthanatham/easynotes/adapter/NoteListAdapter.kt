@@ -3,10 +3,12 @@ package com.watthanatham.easynotes.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.watthanatham.easynotes.R
 import com.watthanatham.easynotes.data.Note
 import com.watthanatham.easynotes.databinding.ItemListNoteBinding
 
@@ -28,6 +30,11 @@ class NoteListAdapter(private val onItemClicked: (Note) -> Unit) : ListAdapter<N
             binding.showDate.text = note.dateTime
             binding.showTitle.text = note.titleName
             binding.showDesc.text = note.description
+            when(note.priority) {
+                1 -> binding.priorityStatus.setBackgroundResource(R.drawable.red_shape)
+                2 -> binding.priorityStatus.setBackgroundResource(R.drawable.yellow_shape)
+                3 -> binding.priorityStatus.setBackgroundResource(R.drawable.green_shape)
+            }
         }
     }
 
@@ -51,8 +58,6 @@ class NoteListAdapter(private val onItemClicked: (Note) -> Unit) : ListAdapter<N
         holder.itemView.setOnClickListener {
             onItemClicked(current)
         }
-
-
         holder.bind(current)
     }
 

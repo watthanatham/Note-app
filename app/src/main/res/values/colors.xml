@@ -22,4 +22,5 @@
     <color name="main_color">#10141C</color>
     <color name="bar_color">#10141C</color>
     <color name="ColorLightBlack">#171C26</color>
+    <color name="deleteColor">#EA6B66</color>
 </resources>

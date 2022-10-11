@@ -11,6 +11,13 @@
         app:cardCornerRadius="10dp"
         android:backgroundTint="@color/ColorLightBlack">
 
+        <View
+            android:id="@+id/priorityStatus"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="right"
+            android:layout_margin="10dp"
+            android:background="@drawable/green_shape"/>
 
         <LinearLayout
             android:layout_width="match_parent"
