@@ -2,6 +2,7 @@ package com.watthanatham.easynotes
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +27,7 @@ class CreateNoteFragment : Fragment() {
     lateinit var note: Note
     private var _binding: FragmentCreateNoteBinding? = null
     private val binding get() = _binding!!
-    var priority: Int = 1
+    var priority: Int = 3
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,26 +48,26 @@ class CreateNoteFragment : Fragment() {
         val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
         currentDate = sdf.format(Date())
         binding.showDateTime.text = currentDate
+        binding.pRed.setOnClickListener {
+            priority = 1
+            binding.pRed.setImageResource(R.drawable.ic_done)
+            binding.pYellow.setImageResource(0)
+            binding.pGreen.setImageResource(0)
+        }
+        binding.pYellow.setOnClickListener {
+            priority = 2
+            binding.pRed.setImageResource(0)
+            binding.pYellow.setImageResource(R.drawable.ic_done)
+            binding.pGreen.setImageResource(0)
+        }
+        binding.pGreen.setOnClickListener {
+            priority = 3
+            binding.pRed.setImageResource(0)
+            binding.pYellow.setImageResource(0)
+            binding.pGreen.setImageResource(R.drawable.ic_done)
+        }
             binding.btnSave.setOnClickListener {
                 addNewNote()
-            }
-            binding.pRed.setOnClickListener { v ->
-                priority = 1
-                binding.pRed.setImageResource(R.drawable.ic_done)
-                binding.pYellow.setImageResource(0)
-                binding.pGreen.setImageResource(0)
-            }
-            binding.pYellow.setOnClickListener { v ->
-                priority = 2
-                binding.pRed.setImageResource(0)
-                binding.pYellow.setImageResource(R.drawable.ic_done)
-                binding.pGreen.setImageResource(0)
-            }
-            binding.pGreen.setOnClickListener { v ->
-                priority = 3
-                binding.pRed.setImageResource(0)
-                binding.pYellow.setImageResource(0)
-                binding.pGreen.setImageResource(R.drawable.ic_done)
             }
     }
     override fun onDestroyView() {
@@ -81,13 +82,12 @@ class CreateNoteFragment : Fragment() {
     private fun isEntryValid(): Boolean {
         return viewModel.isEntryValid(
             binding.etNoteTitle.text.toString(),
-            priority,
             binding.etNoteDesc.text.toString()
         )
     }
     private fun addNewNote() {
         if(isEntryValid()) {
-            viewModel.addNewNote(
+             viewModel.addNewNote(
                 binding.etNoteTitle.text.toString(),
                 priority,
                 binding.etNoteDesc.text.toString(),

@@ -1,5 +1,6 @@
 package com.watthanatham.easynotes
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.watthanatham.easynotes.data.Note
 import com.watthanatham.easynotes.data.NoteDao
@@ -62,8 +63,8 @@ class NoteViewModel(private val noteDao: NoteDao): ViewModel() {
     fun retrieveNote(id: Int): LiveData<Note> {
         return noteDao.getNoteById(id).asLiveData()
     }
-    fun isEntryValid(titleName: String, priority: Int, description: String) : Boolean {
-        if(titleName.isBlank() || priority != 0 && priority >= 3 || description.isBlank()) {
+    fun isEntryValid(titleName: String, description: String) : Boolean {
+        if(titleName.isBlank() || description.isBlank()) {
             return false
         }
         return true
