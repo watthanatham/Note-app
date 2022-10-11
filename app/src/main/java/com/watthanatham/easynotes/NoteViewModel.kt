@@ -68,11 +68,11 @@ class NoteViewModel(private val noteDao: NoteDao): ViewModel() {
         }
         return true
     }
-    fun getNormalNote(): Flow<List<Note>> = noteDao.getNoteByStatusNormal()
-
-    fun getMediumNote(): Flow<List<Note>> = noteDao.getNoteByStatusMedium()
-
-    fun getHighNote(): Flow<List<Note>> = noteDao.getNoteByStatusHigh()
+//    fun getNoteUsingName(titleName: String) {
+//        viewModelScope.launch {
+//            noteDao.getNoteByName(titleName)
+//        }
+//    }
 
 }
 class NoteViewModelFactory(private val noteDao: NoteDao) : ViewModelProvider.Factory {

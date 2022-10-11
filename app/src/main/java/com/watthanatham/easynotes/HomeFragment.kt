@@ -5,13 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.coroutineScope
-import androidx.navigation.NavDirections
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.watthanatham.easynotes.adapter.NoteListAdapter
@@ -98,11 +95,4 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-}
-
-private fun <T> LiveData<T>.observe(
-    coroutineContext: CoroutineContext,
-    function: (t: List<Note>) -> Unit
-) {
-    TODO("Not yet implemented")
 }
