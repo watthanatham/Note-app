@@ -57,33 +57,33 @@
         android:id="@+id/pRed"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="21dp"
+        android:layout_marginStart="20dp"
         android:layout_marginBottom="28dp"
         android:background="@drawable/red_shape"
         app:layout_constraintBottom_toTopOf="@+id/etNoteDesc"
-        app:layout_constraintEnd_toStartOf="@+id/pYellow"
-        app:layout_constraintStart_toEndOf="@+id/txtPriority" />
+        app:layout_constraintStart_toEndOf="@+id/pYellow" />
 
     <ImageView
         android:id="@+id/pYellow"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="28dp"
         android:background="@drawable/yellow_shape"
         app:layout_constraintBottom_toTopOf="@+id/etNoteDesc"
-        app:layout_constraintStart_toEndOf="@+id/pRed" />
+        app:layout_constraintEnd_toStartOf="@+id/pRed" />
 
     <ImageView
         android:id="@+id/pGreen"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="28dp"
         android:background="@drawable/green_shape"
         app:layout_constraintBottom_toTopOf="@+id/etNoteDesc"
-        app:layout_constraintStart_toEndOf="@+id/pYellow" />
+        app:layout_constraintEnd_toStartOf="@+id/pYellow"
+        app:layout_constraintStart_toEndOf="@+id/txtPriority" />
 
     <EditText
         android:id="@+id/etNoteDesc"
