@@ -12,5 +12,7 @@
     <string name="yes">Yes</string>
     <string name="edit_fragment_title">Edit Note</string>
     <string name="priority">Priority</string>
+    <string name="normal">Normal</string>
+    <string name="medium">Medium</string>
 
 </resources>
