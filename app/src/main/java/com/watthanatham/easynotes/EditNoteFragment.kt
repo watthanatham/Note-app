@@ -64,9 +64,12 @@ class EditNoteFragment : Fragment() {
     private fun bind(note: Note) {
         binding.apply {
             etNoteTitle.setText(note.titleName, TextView.BufferType.SPANNABLE)
-//            showDateTime.setText(note.dateTime, TextView.BufferType.SPANNABLE)
             etNoteDesc.setText(note.description, TextView.BufferType.SPANNABLE)
-//            etPriority.setText(note.priority, TextView.BufferType.SPANNABLE)
+            when (note.priority) {
+                1 -> binding.pRed.setImageResource(R.drawable.ic_done)
+                2 -> binding.pYellow.setImageResource(R.drawable.ic_done)
+                3 -> binding.pGreen.setImageResource(R.drawable.ic_done)
+            }
             btnUpdate.setOnClickListener { updateNote() }
             btnDelete.setOnClickListener { showConfirmationDialog()  }
             binding.pRed.setOnClickListener { v ->

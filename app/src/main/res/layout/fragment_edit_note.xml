@@ -61,7 +61,6 @@
         android:layout_marginEnd="21dp"
         android:layout_marginBottom="28dp"
         android:background="@drawable/red_shape"
-        android:src="@drawable/ic_done"
         app:layout_constraintBottom_toTopOf="@+id/etNoteDesc"
         app:layout_constraintEnd_toStartOf="@+id/pYellow"
         app:layout_constraintStart_toEndOf="@+id/txtPriority" />
