@@ -29,7 +29,7 @@ class EditNoteFragment : Fragment() {
     lateinit var note: Note
     private var _binding: FragmentEditNoteBinding? = null
     private val binding get() = _binding!!
-    var priority: Int = 1
+    var priority: Int = 3
     var currentDate:String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,11 +71,7 @@ class EditNoteFragment : Fragment() {
         binding.apply {
             etNoteTitle.setText(note.titleName, TextView.BufferType.SPANNABLE)
             etNoteDesc.setText(note.description, TextView.BufferType.SPANNABLE)
-            when (note.priority) {
-                1 -> binding.pRed.setImageResource(R.drawable.ic_done)
-                2 -> binding.pYellow.setImageResource(R.drawable.ic_done)
-                3 -> binding.pGreen.setImageResource(R.drawable.ic_done)
-            }
+            checkNote()
             btnUpdate.setOnClickListener { updateNote() }
             btnDelete.setOnClickListener { showConfirmationDialog()  }
             binding.pRed.setOnClickListener { v ->
@@ -98,7 +94,15 @@ class EditNoteFragment : Fragment() {
             }
         }
     }
+    private fun checkNote() {
+        when (note.priority) {
+            1 -> binding.pRed.setImageResource(R.drawable.ic_done)
+            2 -> binding.pYellow.setImageResource(R.drawable.ic_done)
+            3 -> binding.pGreen.setImageResource(R.drawable.ic_done)
+        }
+    }
     private fun updateNote() {
+
         return viewModel.updateNote(
             this.navigationArgs.noteId,
             this.binding.etNoteTitle.text.toString(),

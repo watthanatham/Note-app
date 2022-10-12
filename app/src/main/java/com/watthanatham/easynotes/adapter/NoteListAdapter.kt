@@ -14,6 +14,12 @@ import com.watthanatham.easynotes.databinding.ItemListNoteBinding
 
 
 class NoteListAdapter(private val onItemClicked: (Note) -> Unit) : ListAdapter<Note, NoteListAdapter.NoteViewHolder>(DiffCallback) {
+    var arrList = ArrayList<Note>()
+
+//    fun setData(arrNotesList: List<Note>){
+//        arrList = arrNotesList as ArrayList<Note>
+//    }
+
     companion object {
         private val DiffCallback = object: DiffUtil.ItemCallback<Note>() {
             override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {

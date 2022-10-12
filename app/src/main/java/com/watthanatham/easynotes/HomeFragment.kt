@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView
+import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.navigation.fragment.findNavController
@@ -16,6 +16,8 @@ import com.watthanatham.easynotes.data.Note
 
 import com.watthanatham.easynotes.databinding.FragmentHomeBinding
 import kotlinx.coroutines.flow.observeOn
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.coroutines.CoroutineContext
 
 
@@ -28,9 +30,8 @@ class HomeFragment : Fragment() {
     }
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var recyclerView: RecyclerView
-    var priority: Int = 1
-
+    var priority: Int = 3
+//    var arrNotes = ArrayList<Note>()
 
 
     override fun onCreateView(
@@ -54,6 +55,7 @@ class HomeFragment : Fragment() {
             notes.let {
                 adapter.submitList(it)
             }
+//            arrNotes = notes as ArrayList<Note>
         }
         binding.btnAddNote.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToCreateNoteFragment()
@@ -88,6 +90,28 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+//        lateinit var search_view: SearchView
+//        search_view.setOnQueryTextListener( object : SearchView.OnQueryTextListener{
+//            override fun onQueryTextSubmit(p0: String?): Boolean {
+//                return true
+//            }
+//
+//            override fun onQueryTextChange(p0: String?): Boolean {
+//
+//                var tempArr = ArrayList<Note>()
+//
+//                for (arr in arrNotes){
+//                    if (arr.titleName!!.toLowerCase(Locale.getDefault()).contains(p0.toString())){
+//                        tempArr.add(arr)
+//                    }
+//                }
+//
+//                adapter.setData(tempArr)
+//                adapter.notifyDataSetChanged()
+//                return true
+//            }
+//
+//        })
     }
 
     override fun onDestroyView() {
