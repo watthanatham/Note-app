@@ -2,6 +2,7 @@ package com.watthanatham.easynotes
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -72,6 +73,7 @@ class EditNoteFragment : Fragment() {
             etNoteTitle.setText(note.titleName, TextView.BufferType.SPANNABLE)
             etNoteDesc.setText(note.description, TextView.BufferType.SPANNABLE)
             checkNote()
+            Log.d("priority", checkNote().toString())
             btnUpdate.setOnClickListener { updateNote() }
             btnDelete.setOnClickListener { showConfirmationDialog()  }
             binding.pRed.setOnClickListener { v ->
@@ -96,13 +98,21 @@ class EditNoteFragment : Fragment() {
     }
     private fun checkNote() {
         when (note.priority) {
-            1 -> binding.pRed.setImageResource(R.drawable.ic_done)
-            2 -> binding.pYellow.setImageResource(R.drawable.ic_done)
-            3 -> binding.pGreen.setImageResource(R.drawable.ic_done)
+            1 -> {
+                binding.pRed.setImageResource(R.drawable.ic_done)
+                priority = 1
+            }
+            2 -> {
+                binding.pYellow.setImageResource(R.drawable.ic_done)
+                priority = 2
+            }
+            3 -> {
+                binding.pGreen.setImageResource(R.drawable.ic_done)
+                priority = 3
+            }
         }
     }
     private fun updateNote() {
-
         return viewModel.updateNote(
             this.navigationArgs.noteId,
             this.binding.etNoteTitle.text.toString(),
@@ -110,8 +120,6 @@ class EditNoteFragment : Fragment() {
             this.binding.etNoteDesc.text.toString(),
             this.binding.showDateTime.text.toString()
         )
-        val action = EditNoteFragmentDirections.actionEditNoteFragmentToHomeFragment()
-        findNavController().navigate(action)
     }
     private fun deleteNote() {
         viewModel.deleteNote(note)
