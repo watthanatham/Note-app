@@ -46,13 +46,16 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // set layout
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
+        // navigate to edit fragment
         val adapter = NoteListAdapter { note ->
             val action = HomeFragmentDirections.actionHomeFragmentToEditNoteFragment(note.id)
             this.findNavController().navigate(action)
         }
+        // get all notes
         binding.recyclerView.adapter = adapter
         viewModel.allNotes.observe(this.viewLifecycleOwner) { notes ->
             notes.let {
@@ -84,6 +87,7 @@ class HomeFragment : Fragment() {
             this.findNavController().navigate(action)
         }
 
+        // filter note by red color
        binding.txtHigh.setOnClickListener {
             viewModel.highNote.observe(this.viewLifecycleOwner) { notes ->
                 notes.let {
@@ -91,6 +95,7 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+        // filter note by yellow color
        binding.txtMedium.setOnClickListener {
             viewModel.mediumNote.observe(this.viewLifecycleOwner) { notes ->
                 notes.let {
@@ -98,6 +103,7 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+        // filter note by green color
         binding.txtNormal.setOnClickListener {
             viewModel.normalNote.observe(this.viewLifecycleOwner) { notes ->
                 notes.let {
@@ -105,6 +111,7 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+        // reset to show all notes
         binding.resetFilter.setOnClickListener {
             viewModel.allNotes.observe(this.viewLifecycleOwner) { notes ->
                 notes.let {
@@ -118,5 +125,4 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

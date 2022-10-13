@@ -45,21 +45,27 @@ class CreateNoteFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // take time for show and add into database
+
         val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
         currentDate = sdf.format(Date())
         binding.showDateTime.text = currentDate
+
+        // set note status
         binding.pRed.setOnClickListener {
             priority = 1
             binding.pRed.setImageResource(R.drawable.ic_done)
             binding.pYellow.setImageResource(0)
             binding.pGreen.setImageResource(0)
         }
+        // set note status
         binding.pYellow.setOnClickListener {
             priority = 2
             binding.pRed.setImageResource(0)
             binding.pYellow.setImageResource(R.drawable.ic_done)
             binding.pGreen.setImageResource(0)
         }
+        // set note status
         binding.pGreen.setOnClickListener {
             priority = 3
             binding.pRed.setImageResource(0)

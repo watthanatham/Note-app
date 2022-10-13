@@ -25,6 +25,7 @@ class NoteListAdapter(private val onItemClicked: (Note) -> Unit) : ListAdapter<N
             }
         }
     }
+    // show note data on home screen
     class NoteViewHolder(private var binding: ItemListNoteBinding): RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SimpleDateFormat")
         fun bind(note: Note) {
@@ -47,13 +48,14 @@ class NoteListAdapter(private val onItemClicked: (Note) -> Unit) : ListAdapter<N
                 false
             )
         )
+        // clicked on note for go to edit fragment
         viewHolder.itemView.setOnClickListener{
             val position = viewHolder.adapterPosition
             onItemClicked(getItem(position))
         }
         return viewHolder
     }
-
+    // clicked on note for go to edit fragment
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val current = getItem(position)
         holder.itemView.setOnClickListener {

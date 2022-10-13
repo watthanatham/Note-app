@@ -49,9 +49,11 @@ class EditNoteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // show time
         val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
         currentDate = sdf.format(Date())
         binding.showDateTime.text = currentDate
+
         val id = navigationArgs.noteId
         viewModel.retrieveNote(id).observe(this.viewLifecycleOwner) { selectedNote ->
             note = selectedNote
@@ -67,7 +69,7 @@ class EditNoteFragment : Fragment() {
         inputMethodManager.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
         _binding = null
     }
-
+    // get data
     private fun bind(note: Note) {
         binding.apply {
             etNoteTitle.setText(note.titleName, TextView.BufferType.SPANNABLE)
@@ -76,18 +78,22 @@ class EditNoteFragment : Fragment() {
             Log.d("priority", checkNote().toString())
             btnUpdate.setOnClickListener { updateNote() }
             btnDelete.setOnClickListener { showConfirmationDialog()  }
+
+            // set note status
             binding.pRed.setOnClickListener { v ->
                 priority = 1
                 binding.pRed.setImageResource(R.drawable.ic_done)
                 binding.pYellow.setImageResource(0)
                 binding.pGreen.setImageResource(0)
             }
+            // set note status
             binding.pYellow.setOnClickListener { v ->
                 priority = 2
                 binding.pRed.setImageResource(0)
                 binding.pYellow.setImageResource(R.drawable.ic_done)
                 binding.pGreen.setImageResource(0)
             }
+            // set note status
             binding.pGreen.setOnClickListener { v ->
                 priority = 3
                 binding.pRed.setImageResource(0)
@@ -96,6 +102,8 @@ class EditNoteFragment : Fragment() {
             }
         }
     }
+
+    // check status to show on edit fragment and set note status as default
     private fun checkNote() {
         when (note.priority) {
             1 -> {
@@ -112,6 +120,7 @@ class EditNoteFragment : Fragment() {
             }
         }
     }
+
     private fun updateNote() {
         return viewModel.updateNote(
             this.navigationArgs.noteId,
@@ -121,10 +130,13 @@ class EditNoteFragment : Fragment() {
             this.binding.showDateTime.text.toString()
         )
     }
+
     private fun deleteNote() {
         viewModel.deleteNote(note)
         findNavController().navigateUp()
     }
+
+    // dialog will be show before delete
     private fun showConfirmationDialog() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(android.R.string.dialog_alert_title))
