@@ -47,7 +47,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // set layout
-        binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
         // navigate to edit fragment
@@ -119,6 +118,7 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+//        binding.recyclerView.setHasFixedSize(true)
     }
 
     override fun onDestroyView() {
