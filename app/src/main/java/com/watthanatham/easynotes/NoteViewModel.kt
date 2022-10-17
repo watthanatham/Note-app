@@ -13,7 +13,7 @@ class NoteViewModel(private val noteDao: NoteDao): ViewModel() {
     val normalNote: LiveData<List<Note>> = noteDao.getNoteByStatusNormal().asLiveData()
     val mediumNote: LiveData<List<Note>> = noteDao.getNoteByStatusMedium().asLiveData()
     val highNote: LiveData<List<Note>> = noteDao.getNoteByStatusHigh().asLiveData()
-    var arrList = ArrayList<Note>()
+//    var arrList = ArrayList<Note>()
 
     private fun insertNote(note: Note) {
         viewModelScope.launch {

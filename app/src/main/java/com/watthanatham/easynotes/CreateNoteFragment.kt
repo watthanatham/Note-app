@@ -32,7 +32,6 @@ class CreateNoteFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -78,6 +77,10 @@ class CreateNoteFragment : Fragment() {
     }
     override fun onDestroyView() {
         super.onDestroyView()
+        // Hide keyboard.
+        hideKeyboard()
+    }
+    private fun hideKeyboard() {
         // Hide keyboard.
         val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as
                 InputMethodManager

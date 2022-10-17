@@ -63,11 +63,7 @@ class EditNoteFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // Hide keyboard.
-        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as
-                InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
-        _binding = null
+        hideKeyboard()
     }
     // get data
     private fun bind(note: Note) {
@@ -101,6 +97,13 @@ class EditNoteFragment : Fragment() {
                 binding.pGreen.setImageResource(R.drawable.ic_done)
             }
         }
+    }
+    private fun hideKeyboard() {
+        // Hide keyboard.
+        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as
+                InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
+        _binding = null
     }
 
     // check status to show on edit fragment and set note status as default
