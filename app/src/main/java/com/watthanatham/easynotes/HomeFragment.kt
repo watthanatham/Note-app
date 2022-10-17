@@ -108,7 +108,7 @@ class HomeFragment : Fragment() {
 
 // unused
 //    var arrNotes = ArrayList<Note>()
-//                arrNotes = notes as ArrayList<Note>
+//    arrNotes = notes as ArrayList<Note>
 //        binding.searchView.setOnQueryTextListener( object : SearchView.OnQueryTextListener{
 //            override fun onQueryTextSubmit(p0: String?): Boolean {
 //                return  true
