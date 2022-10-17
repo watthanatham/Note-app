@@ -47,7 +47,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // set layout
         binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-
         // navigate to edit fragment
         val adapter = NoteListAdapter { note ->
             val action = HomeFragmentDirections.actionHomeFragmentToEditNoteFragment(note.id)
@@ -97,6 +96,7 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+        binding.recyclerView.setHasFixedSize(true)
     }
     override fun onDestroyView() {
         super.onDestroyView()
@@ -108,7 +108,6 @@ class HomeFragment : Fragment() {
 
 // unused
 //    var arrNotes = ArrayList<Note>()
-//        binding.recyclerView.setHasFixedSize(true)
 //                arrNotes = notes as ArrayList<Note>
 //        binding.searchView.setOnQueryTextListener( object : SearchView.OnQueryTextListener{
 //            override fun onQueryTextSubmit(p0: String?): Boolean {

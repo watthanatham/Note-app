@@ -7,12 +7,15 @@
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="my_note">My Note</string>
-    <string name="delete_question">Are you sure you want to delete your note ?</string>
+    <string name="delete_question">Do you want to delete your note ?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="edit_fragment_title">Edit Note</string>
     <string name="priority">Priority</string>
     <string name="normal">Normal</string>
     <string name="medium">Medium</string>
+    <string name="delete">Delete</string>
+    <string name="update_title">Update</string>
+    <string name="update">Update successfully</string>
 
 </resources>

@@ -125,6 +125,7 @@ class EditNoteFragment : Fragment() {
     }
 
     private fun updateNote() {
+        showSuccessDialog()
         return viewModel.updateNote(
             this.navigationArgs.noteId,
             this.binding.etNoteTitle.text.toString(),
@@ -142,7 +143,7 @@ class EditNoteFragment : Fragment() {
     // dialog will be show before delete
     private fun showConfirmationDialog() {
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle(getString(android.R.string.dialog_alert_title))
+            .setTitle(getString(R.string.delete))
             .setMessage(getString(R.string.delete_question))
             .setCancelable(false)
             .setNegativeButton(getString(R.string.no)) { _, _ -> }
@@ -152,6 +153,12 @@ class EditNoteFragment : Fragment() {
             .setPositiveButton(getString(R.string.yes)) { _, _ ->
                 deleteNote()
             }
+            .show()
+    }
+    private fun showSuccessDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(R.string.update_title))
+            .setMessage(getString(R.string.update))
             .show()
     }
 }
