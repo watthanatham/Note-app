@@ -32,7 +32,6 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     var priority: Int = 3
-//    var arrNotes = ArrayList<Note>()
 
 
     override fun onCreateView(
@@ -59,28 +58,8 @@ class HomeFragment : Fragment() {
         viewModel.allNotes.observe(this.viewLifecycleOwner) { notes ->
             notes.let {
                 adapter.submitList(it)
-//                arrNotes = notes as ArrayList<Note>
             }
         }
-//        binding.searchView.setOnQueryTextListener( object : SearchView.OnQueryTextListener{
-//            override fun onQueryTextSubmit(p0: String?): Boolean {
-//                return  true
-//            }
-//
-//            override fun onQueryTextChange(p0: String?): Boolean {
-//                var tempArr = ArrayList<Note>()
-//                for (arr in arrNotes) {
-//                    if (arr.titleName.toLowerCase(Locale.getDefault()).contains(p0.toString())){
-//                        tempArr.add(arr)
-//                    }
-//                }
-//                viewModel.setData(tempArr)
-//                Log.d("data", tempArr.toString())
-//                adapter.notifyDataSetChanged()
-//                return true
-//            }
-//
-//        })
         binding.btnAddNote.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToCreateNoteFragment()
             this.findNavController().navigate(action)
@@ -118,11 +97,35 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-//        binding.recyclerView.setHasFixedSize(true)
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 }
+
+
+
+// unused
+//    var arrNotes = ArrayList<Note>()
+//        binding.recyclerView.setHasFixedSize(true)
+//                arrNotes = notes as ArrayList<Note>
+//        binding.searchView.setOnQueryTextListener( object : SearchView.OnQueryTextListener{
+//            override fun onQueryTextSubmit(p0: String?): Boolean {
+//                return  true
+//            }
+//
+//            override fun onQueryTextChange(p0: String?): Boolean {
+//                var tempArr = ArrayList<Note>()
+//                for (arr in arrNotes) {
+//                    if (arr.titleName.toLowerCase(Locale.getDefault()).contains(p0.toString())){
+//                        tempArr.add(arr)
+//                    }
+//                }
+//                viewModel.setData(tempArr)
+//                Log.d("data", tempArr.toString())
+//                adapter.notifyDataSetChanged()
+//                return true
+//            }
+//
+//        })
