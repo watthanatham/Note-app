@@ -59,6 +59,7 @@ class HomeFragment : Fragment() {
                 adapter.submitList(it)
             }
         }
+//        binding.recyclerView.setHasFixedSize(true)
         binding.btnAddNote.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToCreateNoteFragment()
             this.findNavController().navigate(action)
@@ -96,7 +97,6 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-        binding.recyclerView.setHasFixedSize(true)
     }
     override fun onDestroyView() {
         super.onDestroyView()
